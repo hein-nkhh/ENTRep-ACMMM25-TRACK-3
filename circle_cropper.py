@@ -80,3 +80,6 @@ class Circle_Cropper:
 
         logger.warning(f"Không phát hiện hình tròn trong ảnh: {image_path}")
         return None
+
+    def __call__(self, image_path):
+        return self.crop(image_path=image_path)

@@ -1,0 +1,7 @@
+TRAIN_IMG_DIR  : "./data/train/train/imgs"
+TEST_IMG_DIR  : "./data/PublicData/PublicTest"
+T2I_JSON  : "./data/train/train/t2i.json"
+T2I_CSV  : "./data/Track3_Public/t2i.csv"
+OUTPUT_DIR : "./data"
+
+VAL_RATIO : 0.1
