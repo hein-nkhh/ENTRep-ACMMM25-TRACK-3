@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import Dataset
 from pathlib import Path
 from PIL import Image
-from circle_cropper import Circle_Cropper
+from .utils import Circle_Cropper
 import logging
 
 
