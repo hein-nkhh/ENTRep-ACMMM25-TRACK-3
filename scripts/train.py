@@ -105,9 +105,9 @@ def main():
             img_model=cfg['MODEL']['ViT_encoder'],
             embed_size=cfg['MODEL']['embed_size'],
             unfreeze_n_blocks=cfg['MODEL']['unfreeze_n_blocks'],
-            lr=cfg['OPTIMIZER']['lr'],
-            warmup_epochs=cfg['OPTIMIZER']['weight_decay'],
-            weight_decay=cfg['OPTIMIZER']['warmup_epochs'],
+            lr=5e-5,
+            warmup_epochs=cfg['OPTIMIZER']['warmup_epochs'],
+            weight_decay=1e-3,
             milestones=tuple(cfg['OPTIMIZER']['milestones']),
             lr_mult=cfg['OPTIMIZER']['lr_mult'],
         )

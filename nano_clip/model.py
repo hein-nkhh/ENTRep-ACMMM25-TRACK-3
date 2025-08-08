@@ -71,7 +71,8 @@ class NanoCLIP(L.LightningModule):
             lr_scale = min(1.0, (self.trainer.global_step + 1) / total_warmup_steps)
             for pg in optimizer.param_groups:
                 initial_lr = pg.get("initial_lr", self.lr)
-                pg["lr"] = lr_scale * initial_lr
+                # pg["lr"] = lr_scale * initial_lr
+                pg["lr"] = lr_scale * float(initial_lr)
 
         optimizer.step(closure=optimizer_closure)
         self.log('_LR', optimizer.param_groups[-1]['lr'], prog_bar=False, logger=True)

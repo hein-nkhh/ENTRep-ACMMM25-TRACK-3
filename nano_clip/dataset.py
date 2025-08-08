@@ -47,6 +47,7 @@ class ImageTextDataset(Dataset):
         # image = Image.open(img_path).convert('RGB')
         image = self.cropper(img_path)
         if self.img_transform:
+            image = Image.fromarray(image)
             image = self.img_transform(image)
 
         if caption is not None and self.txt_transform:
