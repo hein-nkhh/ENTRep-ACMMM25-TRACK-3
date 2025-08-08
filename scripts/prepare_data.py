@@ -5,21 +5,19 @@ import random
 import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from utils import load_config
+from utils.config import load_config
+from utils.logger import default_logger as logger
 cfg = load_config()
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger(__name__)
-
 # Paths
-TRAIN_IMG_DIR = cfg['TRAIN_IMG_DIR']
-TEST_IMG_DIR = cfg["TEST_IMG_DIR"]
-T2I_JSON = cfg["T2I_JSON"]
-T2I_CSV = cfg['T2I_CSV']
+TRAIN_IMG_DIR = cfg['data']['TRAIN_IMG_DIR']
+TEST_IMG_DIR = cfg['data']['TEST_IMG_DIR']
+T2I_JSON = cfg['data']['T2I_JSON']
+T2I_CSV = cfg['data']['T2I_CSV']
 
-OUTPUT_DIR = cfg["OUTPUT_DIR"]
+OUTPUT_DIR = cfg['data']['OUTPUT_DIR']
 
-VAL_RATIO = cfg["VAL_RATIO"]
+VAL_RATIO = cfg['VAL_RATIO']
 random.seed(42)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -40,7 +38,7 @@ for text, filename in labels.items():
     else:
         logger.warning(f"⚠️ File không tồn tại: {img_path}")
 
-logger.info("Tổng số ảnh hợp lệ: %d", len(data))
+logger.info("📦 Tổng số ảnh hợp lệ: %d", len(data))
 
 # === Split train/val (tùy chọn) ===
 # train_data, val_data = train_test_split(data, test_size=VAL_RATIO, random_state=SEED)
@@ -60,7 +58,7 @@ logger.info("✅ Đã tạo train.csv (%d mẫu), val.csv (%d mẫu)", len(train
 
 # === Chuẩn bị test.csv từ t2i.csv ===
 df = pd.read_csv(T2I_CSV, header=None, names=["text"])
-logger.info("Đọc test caption: %d dòng", len(df))
+logger.info("📦 Đọc test caption: %d dòng", len(df))
 
 # Bị dupliacte
 first_row = pd.DataFrame({"text": ["edema and erythema of the arytenoid cartilages"]})

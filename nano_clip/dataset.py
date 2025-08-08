@@ -3,12 +3,8 @@ import torch
 from torch.utils.data import Dataset
 from pathlib import Path
 from PIL import Image
-from .utils import Circle_Cropper
-import logging
-
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger(__name__)
+from .utils.circle_cropper import Circle_Cropper
+from utils.logger import default_logger as logger
 
 class ImageTextDataset(Dataset):
     """
@@ -17,9 +13,9 @@ class ImageTextDataset(Dataset):
     """
     def __init__(self, csv_file, img_root_dir=None, split='train', img_transform=None, txt_transform=None, indices=None):
         
-        logger.info("[{dataset}] Đang load dataset từ %s", csv_file)
+        logger.info("[{dataset}] 🔍 Đang load dataset từ %s", csv_file)
         self.data = pd.read_csv(csv_file)
-        logger.info("[{dataset}] Tổng cộng %d samples", len(self.data))
+        logger.info("[{dataset}] 📦 Tổng cộng %d samples", len(self.data))
         
         self.img_root_dir = Path(img_root_dir) if img_root_dir else None
         self.img_transform = img_transform

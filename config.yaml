@@ -1,7 +1,52 @@
-TRAIN_IMG_DIR  : "./data/train/train/imgs"
-TEST_IMG_DIR  : "./data/PublicData/PublicTest"
-T2I_JSON  : "./data/train/train/t2i.json"
-T2I_CSV  : "./data/Track3_Public/t2i.csv"
-OUTPUT_DIR : "./data"
+data:
+  TRAIN_IMG_DIR  : "./data/train/train/imgs"
+  TEST_IMG_DIR  : "./data/PublicData/PublicTest"
+  T2I_JSON  : "./data/train/train/t2i.json"
+  T2I_CSV  : "./data/Track3_Public/t2i.csv"
+  OUTPUT_DIR : "./data"
+
+  TRAIN_CSV: "./data/train.csv"
+  VAL_CSV: "./data/val.csv"
+  TEST_CSV: "./data/test.csv"
+
+logging:
+  save_dir: "./data/logs"
 
 VAL_RATIO : 0.1
+
+TRAIN:
+  resize: [256, 256]
+  crop: [224, 224]
+  crop_scale: [0.8, 1.0]
+  rotation: 10
+  flip_prob: 0.3
+  color_jitter:
+    brightness: 0.1
+    contrast: 0.1
+  random_erasing:
+    p: 0.3
+    scale: [0.02, 0.08]
+    ratio: [0.3, 3.3]
+
+VALID:
+  resize: [224, 224]
+
+MODEL:
+  ViT_encoder: "dinov2_vits14"
+  Lang_encoder: "sentence-transformers/all-MiniLM-L6-v2"
+  embed_size: 64
+  unfreeze_n_blocks: 4
+
+OPTIMIZER:
+  lr: 5e-5
+  weight_decay: 1e-3
+  warmup_epochs: 2
+  milestones: [10, 20, 30]
+  lr_mult: 0.1
+
+TRAINING:
+  precision: "16-mixed"
+  max_epochs: 10
+  check_val_every_n_epoch: 2
+  log_every_n_steps: 10
+  fast_dev_run: False
