@@ -1,8 +1,7 @@
 import yaml
 import os
 import logging
-
-logger = logging.getLogger(__name__)
+from .logger import default_logger as logger
 
 def load_config(config_path="config.yaml"):
     if not os.path.exists(config_path):

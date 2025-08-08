@@ -1,17 +1,7 @@
 import os
 import cv2
 import numpy as np
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO) 
-
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-if not logger.handlers:
-    logger.addHandler(ch)
+from utils.logger import default_logger as logger
     
 class Circle_Cropper:
     def __init__(self, output_dir=None):
@@ -29,7 +19,7 @@ class Circle_Cropper:
         "Xử lý và crop ảnh đơn"
         img = cv2.imread(image_path)
         if img is None:
-            logger.error(f"Không tìm thấy hoặc không đọc được ảnh: {image_path}")
+            logger.error(f"⚠️ Không tìm thấy hoặc không đọc được ảnh: {image_path}")
             return None
         
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -74,11 +64,11 @@ class Circle_Cropper:
                 if self.output_dir:
                     save_path = os.path.join(self.output_dir, os.path.basename(image_path))
                     cv2.imwrite(save_path, cropped_img)
-                    logger.info(f"Đã lưu ảnh crop: {save_path}")
+                    logger.info(f"✅ Đã lưu ảnh crop: {save_path}")
 
                 return cropped_img
 
-        logger.warning(f"Không phát hiện hình tròn trong ảnh: {image_path}")
+        logger.warning(f"⚠️ Không phát hiện hình tròn trong ảnh: {image_path}")
         return None
 
     def __call__(self, image_path):
