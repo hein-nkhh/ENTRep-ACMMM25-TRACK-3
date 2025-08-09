@@ -23,18 +23,22 @@ cfg = load_config()
 def main():
     
     # Get transform
+    logger.info("Load train_transform and valid_transform")
     train_transform = get_transforms(mode="train")
     valid_transform = get_transforms(mode = "valid")
     
     # Get encoder model
+    logger.info("Get image encoder and text encoder")
     txt_model = cfg['MODEL']['Lang_encoder']
     img_model = cfg['MODEL']['ViT_encoder']
     
     # Load dataset and prepare K-Fold
+    logger.info("Load dataset and prepare K-Fold")
     dataset = ImageTextDataset(csv_file=cfg['data']['TRAIN_CSV'], split="train")
     kf = KFold(n_splits=10, shuffle=True, random_state=42)
     fold_scores = []
     
+    logger.info("Start training...")
     for fold, (train_idx, val_idx) in enumerate(kf.split(dataset)):
         logger.info("➡️ Fold %d bắt đầu", fold)
         

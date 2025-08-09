@@ -6,7 +6,7 @@ import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from utils.config import load_config
-from utils.logger import default_logger as logger
+# from utils.logger import default_logger as logger
 cfg = load_config()
 
 # Paths
@@ -36,9 +36,10 @@ for text, filename in labels.items():
     if os.path.exists(img_path):
         data.append((img_path, text))
     else:
-        logger.warning(f"⚠️ File không tồn tại: {img_path}")
+        # logger.warning(f"⚠️ File không tồn tại: {img_path}")
+        None
 
-logger.info("📦 Tổng số ảnh hợp lệ: %d", len(data))
+# logger.info("📦 Tổng số ảnh hợp lệ: %d", len(data))
 
 # === Split train/val (tùy chọn) ===
 # train_data, val_data = train_test_split(data, test_size=VAL_RATIO, random_state=SEED)
@@ -54,11 +55,11 @@ def write_csv(data_list, path):
 
 write_csv(train_data, TRAIN_CSV)
 write_csv(val_data, VAL_CSV)
-logger.info("✅ Đã tạo train.csv (%d mẫu), val.csv (%d mẫu)", len(train_data), len(val_data))
+# logger.info("✅ Đã tạo train.csv (%d mẫu), val.csv (%d mẫu)", len(train_data), len(val_data))
 
 # === Chuẩn bị test.csv từ t2i.csv ===
 df = pd.read_csv(T2I_CSV, header=None, names=["text"])
-logger.info("📦 Đọc test caption: %d dòng", len(df))
+# logger.info("📦 Đọc test caption: %d dòng", len(df))
 
 # Bị dupliacte
 first_row = pd.DataFrame({"text": ["edema and erythema of the arytenoid cartilages"]})
@@ -70,4 +71,4 @@ with open(TEST_CSV, mode='w', newline='') as f:
     for text in df["text"]:
         writer.writerow(["", text])
 
-logger.info("✅ Đã tạo test.csv (%d mẫu)", len(df))
+# logger.info("✅ Đã tạo test.csv (%d mẫu)", len(df))

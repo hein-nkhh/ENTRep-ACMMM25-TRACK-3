@@ -4,7 +4,7 @@ from torch.utils.data import Dataset
 from pathlib import Path
 from PIL import Image
 from .utils.circle_cropper import Circle_Cropper
-from utils.logger import default_logger as logger
+# from utils.logger import default_logger as logger
 
 class ImageTextDataset(Dataset):
     """
@@ -13,9 +13,9 @@ class ImageTextDataset(Dataset):
     """
     def __init__(self, csv_file, img_root_dir=None, split='train', img_transform=None, txt_transform=None, indices=None):
         
-        logger.info("[{dataset}] 🔍 Đang load dataset từ %s", csv_file)
+        # logger.info("[{dataset}] 🔍 Đang load dataset từ %s", csv_file)
         self.data = pd.read_csv(csv_file)
-        logger.info("[{dataset}] 📦 Tổng cộng %d samples", len(self.data))
+        # logger.info("[{dataset}] 📦 Tổng cộng %d samples", len(self.data))
         
         self.img_root_dir = Path(img_root_dir) if img_root_dir else None
         self.img_transform = img_transform
@@ -27,7 +27,7 @@ class ImageTextDataset(Dataset):
         
         if indices is not None:
             self.data = self.data.iloc[indices].reset_index(drop=True)
-            logger.info("✂️ Lấy subset %d samples theo indices", len(self.data))
+            # logger.info("✂️ Lấy subset %d samples theo indices", len(self.data))
 
     def __len__(self):
         return len(self.data)
@@ -63,15 +63,15 @@ class CollateImageText:
     def __init__(self, tokenizer=None, max_length=128):
         self.tokenizer = tokenizer
         self.max_length = max_length
-        logger.info("🧱 Tạo CollateImageText với tokenizer=%s, max_length=%d", 
-                    tokenizer.__class__.__name__ if tokenizer else "None", max_length)
+        # logger.info("🧱 Tạo CollateImageText với tokenizer=%s, max_length=%d", 
+                    # tokenizer.__class__.__name__ if tokenizer else "None", max_length)
 
     def __call__(self, batch):
         images, captions = zip(*batch)
         images = torch.stack(images)
 
         if self.tokenizer is None or captions[0] is None:
-            logger.debug("🧪 Test mode: chỉ trả về ảnh")
+            # logger.debug("🧪 Test mode: chỉ trả về ảnh")
             return (images,)  # test mode
 
         encoding = self.tokenizer(

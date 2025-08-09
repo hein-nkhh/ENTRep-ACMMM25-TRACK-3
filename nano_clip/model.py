@@ -3,7 +3,7 @@ import torch.nn.functional as F
 import pytorch_lightning as L
 import numpy as np
 import faiss
-from utils.logger import default_logger as logger
+# from utils.logger import default_logger as logger
 
 from nano_clip.encoders import TextEncoder
 from nano_clip.encoders import ImageEncoder
@@ -40,18 +40,18 @@ class NanoCLIP(L.LightningModule):
         
         self.save_hyperparameters()
         
-        logger.info("⚙️ Initializing NanoCLIP model...")
+        # logger.info("⚙️ Initializing NanoCLIP model...")
         self.img_encoder = ImageEncoder(self.embed_size, self.img_model, unfreeze_n_blocks)
         self.txt_encoder = TextEncoder(self.embed_size, self.txt_model, unfreeze_n_blocks)
         self.loss_fn = ContrastiveLoss(temperature=0.05)
-        logger.info("✅ NanoCLIP initialized with img_model=%s, txt_model=%s", img_model, txt_model)
+        # logger.info("✅ NanoCLIP initialized with img_model=%s, txt_model=%s", img_model, txt_model)
 
     
     def configure_optimizers(self):
         """
         Define the optimizer and the learning rate scheduler.
         """
-        logger.info("⚙️ Configuring optimizer and scheduler.")
+        # logger.info("⚙️ Configuring optimizer and scheduler.")
         optimizer_params = [
             {"params": self.img_encoder.parameters(), "lr": self.lr, "weight_decay": self.weight_decay},
             {"params": self.txt_encoder.parameters(), "lr": self.lr, "weight_decay": self.weight_decay},
@@ -82,7 +82,7 @@ class NanoCLIP(L.LightningModule):
         Define the forward pass of the pipeline.
         """
         # compute image embeddings
-        logger.debug("🔁 Running forward pass.")
+        # logger.debug("🔁 Running forward pass.")
         image_embedding = self.img_encoder(image) # (batch_size, out_dim)
         image_embedding = F.normalize(image_embedding, p=2, dim=-1) # normalize embeddings
         
@@ -121,11 +121,11 @@ class NanoCLIP(L.LightningModule):
         self.log("loss", loss, prog_bar=True, logger=True)
         self.log("batch_acc", batch_accuracy, prog_bar=True, logger=True)
         
-        logger.debug("Train Step %d - Loss: %.4f, Acc: %.4f", batch_idx, loss.item(), batch_accuracy.item())
+        # logger.debug("Train Step %d - Loss: %.4f, Acc: %.4f", batch_idx, loss.item(), batch_accuracy.item())
         return loss
     
     def on_validation_epoch_start(self):
-        logger.info("🧪 Starting validation epoch...")
+        # logger.info("🧪 Starting validation epoch...")
         self.validation_descriptors = {"img": [], "txt": []}
         
     def validation_step(self, batch, batch_idx):
@@ -145,7 +145,7 @@ class NanoCLIP(L.LightningModule):
         """ 
         Calculate the recall at 1, 5, and 10 for the validation set.
         """
-        logger.info("🧪 Evaluating validation recall and MRR...")
+        # logger.info("🧪 Evaluating validation recall and MRR...")
         img_descriptors = np.concatenate(self.validation_descriptors["img"], axis=0) # (N, out_dim)
         txt_descriptors = np.concatenate(self.validation_descriptors["txt"], axis=0) # (N, out_dim)
         
@@ -162,7 +162,7 @@ class NanoCLIP(L.LightningModule):
         mrr = self._calculate_mrr(img_descriptors, txt_descriptors, labels)
         self.log("mrr", mrr, prog_bar = True, logger=True)
         
-        logger.info("✅ Validation completed. R@1: %.3f | R@5: %.3f | R@10: %.3f | MRR: %.3f", recall_1, recall_5, recall_10, mrr)
+        # logger.info("✅ Validation completed. R@1: %.3f | R@5: %.3f | R@10: %.3f | MRR: %.3f", recall_1, recall_5, recall_10, mrr)
 
         # clear the validation descriptors for the next epoch
         self.validation_descriptors.clear()

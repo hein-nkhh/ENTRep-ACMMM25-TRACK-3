@@ -1,13 +1,13 @@
 import torchvision.transforms as T
 from torchvision.transforms import InterpolationMode
 from utils.config import load_config
-from utils.logger import default_logger as logger
+# from utils.logger import default_logger as logger
 
 cfg = load_config()
 
 def get_transforms(mode = "train"):
     if mode == "train":
-        logger.info("🔧 Khởi tạo train transform.")
+        # logger.info("🔧 Khởi tạo train transform.")
         train_transform = T.Compose([
             T.Resize(tuple(cfg['TRAIN']['resize']), interpolation=InterpolationMode.BICUBIC),
             T.RandomResizedCrop(tuple(cfg['TRAIN']['crop']), scale=tuple(cfg['TRAIN']['crop_scale']), interpolation=InterpolationMode.BICUBIC),
@@ -25,7 +25,7 @@ def get_transforms(mode = "train"):
         return train_transform
     
     elif mode == "valid":
-        logger.info("🔧 Khởi tạo validation transform.")
+        # logger.info("🔧 Khởi tạo validation transform.")
         valid_transform = T.Compose([
             T.Resize(tuple(cfg['VALID']['resize']), interpolation=InterpolationMode.BICUBIC),
             T.ToTensor(),

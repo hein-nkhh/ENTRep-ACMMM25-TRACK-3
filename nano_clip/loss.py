@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from utils.logger import default_logger as logger
+# from utils.logger import default_logger as logger
 
 class ContrastiveLoss(nn.Module):
     """ 
@@ -13,8 +13,8 @@ class ContrastiveLoss(nn.Module):
         super().__init__()
         self.temperature = temperature
         self.penalty_weight = penalty_weight
-        logger.info("📐 ContrastiveLoss initialized with temperature=%.2f, penalty_weight=%.2f",
-                    temperature, penalty_weight)
+        # logger.info("📐 ContrastiveLoss initialized with temperature=%.2f, penalty_weight=%.2f",
+                    # temperature, penalty_weight)
         
     def forward(self, image_embedding, text_embedding, topk=5):
         batch_size = image_embedding.shape[0]
