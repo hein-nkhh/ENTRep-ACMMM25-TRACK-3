@@ -74,7 +74,7 @@ def main():
             shuffle=True, 
             num_workers=4, 
             pin_memory=True, 
-            collate_fn=CollateImageText(tokenizer)
+            collate_fn=CollateImageText(tokenizer=tokenizer, max_length=cfg['MODEL']['max_length'])
         )
         
         val_dataloader = DataLoader(
@@ -83,7 +83,7 @@ def main():
             shuffle=False, 
             num_workers=4, 
             pin_memory=True,
-            collate_fn=CollateImageText(tokenizer)
+            collate_fn=CollateImageText(tokenizer=tokenizer, max_length=cfg['MODEL']['max_length'])
         )
         
         # Tensorboard training
