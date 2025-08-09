@@ -132,8 +132,8 @@ def main():
             ],
             log_every_n_steps=cfg['TRAINING']['log_every_n_steps'],
             fast_dev_run=cfg['TRAINING']['fast_dev_run'],
-            enable_model_summary=True,
-            enable_progress_bar=False
+            enable_model_summary=False,
+            enable_progress_bar=True
         )
         
         trainer.fit(model, train_dataloader, val_dataloader)
