@@ -4,7 +4,7 @@ data:
   T2I_JSON  : "./data/train/train/t2i.json"
   T2I_CSV  : "./data/Track3_Public/t2i.csv"
   OUTPUT_DIR : "./data/dataset"
-  RESULT_TOP_K: ".data/result"
+  RESULT_TOP_K: "./data/result"
 
   TRAIN_CSV: "./data/dataset/train.csv"
   VAL_CSV: "./data/dataset/val.csv"
