@@ -40,6 +40,7 @@ def main():
     
     logger.info("Start training...")
     for fold, (train_idx, val_idx) in enumerate(kf.split(dataset)):
+        print("--------------------------------------------------------------------------------------------------")
         logger.info("➡️ Fold %d bắt đầu", fold)
         
         # Dataset
@@ -109,9 +110,9 @@ def main():
             img_model=cfg['MODEL']['ViT_encoder'],
             embed_size=cfg['MODEL']['embed_size'],
             unfreeze_n_blocks=cfg['MODEL']['unfreeze_n_blocks'],
-            lr=5e-5,
+            lr=float(cfg['OPTIMIZER']['lr']),
             warmup_epochs=cfg['OPTIMIZER']['warmup_epochs'],
-            weight_decay=1e-3,
+            weight_decay=float(cfg['OPTIMIZER']['weight_decay']),
             milestones=tuple(cfg['OPTIMIZER']['milestones']),
             lr_mult=cfg['OPTIMIZER']['lr_mult'],
         )
@@ -132,6 +133,7 @@ def main():
             log_every_n_steps=cfg['TRAINING']['log_every_n_steps'],
             fast_dev_run=cfg['TRAINING']['fast_dev_run'],
             enable_model_summary=True,
+            enable_progress_bar=False
         )
         
         trainer.fit(model, train_dataloader, val_dataloader)

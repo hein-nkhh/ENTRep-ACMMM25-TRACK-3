@@ -3,11 +3,11 @@ data:
   TEST_IMG_DIR  : "./data/PublicData/PublicTest"
   T2I_JSON  : "./data/train/train/t2i.json"
   T2I_CSV  : "./data/Track3_Public/t2i.csv"
-  OUTPUT_DIR : "./data"
+  OUTPUT_DIR : "./data/dataset"
 
-  TRAIN_CSV: "./data/train.csv"
-  VAL_CSV: "./data/val.csv"
-  TEST_CSV: "./data/test.csv"
+  TRAIN_CSV: "./data/dataset/train.csv"
+  VAL_CSV: "./data/dataset/val.csv"
+  TEST_CSV: "./data/dataset/test.csv"
 
 logging:
   save_dir: "./data/logs"

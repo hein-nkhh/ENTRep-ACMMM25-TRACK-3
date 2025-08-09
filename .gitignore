@@ -209,3 +209,9 @@ __marimo__/
 #checkpoint_hunggingface
 checkpoints/
 checkpoints/**/*
+
+# data/dataset 
+data/dataset
+
+# data/log (training model result)
+data/logs
