@@ -210,6 +210,7 @@ __marimo__/
 checkpoints/
 checkpoints/**/*
 
-# data/dataset, result 
+# data/dataset, result, downloaded_files
 data/dataset
 data/result
+data/downloaded_files
