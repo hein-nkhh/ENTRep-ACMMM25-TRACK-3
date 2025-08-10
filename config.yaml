@@ -12,7 +12,7 @@ data:
 
   DRIVE_URL: "https://drive.google.com/drive/folders/1MHfq2L8q1yq9UIia6UB1zLB-iLDh76vl?hl=vi"
   DOWNLOADED_FILES: "./data/downloaded_files"
-  LIST_IMAGES: "./data/downloaded_files/ENTRep_Private_Dataset"
+  LIST_IMAGES: "./data/downloaded_files/ENTRep_Private_Dataset/ENTRep Private Dataset"
 
 logging:
   save_dir: "./checkpoints/nano_clip/logs"
