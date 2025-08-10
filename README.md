@@ -12,21 +12,38 @@ The system begins with **10 model NanoCLIP** (Kfold) architecture to quickly ret
 
 ```
 .
-├── requirements.txt             # Thư viện Python
-├── config.py                   # Thiết lập chung
-├── .env                        # (tuỳ chọn) biến môi trường
-├── blacklist_builder/          # Tạo blacklist từ dữ liệu báo chí
-│   └── blacklist_builder_app.py
-│   └── builder/
-├── llm_model/                  # Gọi và sử dụng mô hình LLM
-├── utils/                      # Tiện ích dùng chung
-├── dynamodb/                   # Tương tác với DynamoDB
-├── mongodb/                    # Tương tác với MongoDB
-├── agent/                      # Backend API agent để truy vấn
-│   └── app.py
-├── Frontend/                   # Giao diện người dùng
-    ├── package.json
-    └── ...
+|── checkpoints/                # Save model parameter and checkpoint finetune
+|── data/                       # Chứa dataset của ENTRep-acmmm-track3
+|── nano_clip/
+|   └── inference/
+|   |   └── inference_model.py
+|   |   └── retrieval.py
+|   └── postprocess/
+|   |   └── posfuse_combiner.py
+|   |   └── utils.py
+|   └── utils/
+|   |   └── circle_cropper.py
+|   |   └── transforms.py
+|   └── __init__.py
+|   └── dataset.py
+|   └── encoders.py
+|   └── loss.py
+|   └── model.py
+|── scripts/
+|   └── download_and_extract_dataset.py
+|   └── infer_retrieval.py
+|   └── prepare_data.py
+|   └── rerank_posfuse.py
+|   └── train.py
+|── utils/
+|   └── config.py
+|   └── drive_utils.py
+|   └── get_path.py
+|   └── logger.py
+|── .env                                          # (Tùy chọn) Biến môi trường
+|── .gitinore
+|── config.yaml
+|── requirements.txt
 ```
 
 ---
