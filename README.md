@@ -58,16 +58,16 @@ The system begins with **10 model NanoCLIP** (Kfold) architecture to quickly ret
 ## 🧪 Python Environment Setup
 
 ```bash
-# Tạo môi trường ảo
+# Create virtual environment
 python -m venv venv
 
-# Kích hoạt
+# Activate environment
 # Windows:
 venv\Scripts\activate
 # macOS/Linux:
 source venv/bin/activate
 
-# Cài đặt thư viện
+# Install dependencies
 pip install -r requirements.txt
 ```
 
