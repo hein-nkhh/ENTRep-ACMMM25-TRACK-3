@@ -1,4 +1,4 @@
-# ENTRep-ACMMM25-TRACK-3: KGER: A Knowledge-Grounded Endoscopic Retrieval Framework with a Fused Bi-Encoder and Gemini Re-ranking Pipeline
+# H3N1 at ENTRep-ACMMM25-TRACK-3: KGER: A Knowledge-Grounded Endoscopic Retrieval Framework with a Fused Bi-Encoder and Gemini Re-ranking Pipeline
 
 ## ✨ Overview
 
@@ -16,33 +16,33 @@ The system begins with **10 model NanoCLIP** (Kfold) architecture to quickly ret
 |── data/                                         # Contains the ENTRep-ACMMM-TRACK-3 dataset used for training and evaluation.
 |── nano_clip/                                    # Core module implementing the NanoCLIP model pipeline: dataset creation, training, inference, and post-processing.
 |   └── inference/
-|   |   └── inference_model.py
-|   |   └── retrieval.py
+|   |   └── inference_model.py                    # Defines the inference model architecture and loading pre-trained weights.
+|   |   └── retrieval.py                          # Implements the image retrieval logic and query processing.
 |   └── postprocess/
-|   |   └── posfuse_combiner.py
-|   |   └── utils.py
+|   |   └── posfuse_combiner.py                   # Implements the Pos-Fuse score fusion strategy for re-ranking retrieved results.
+|   |   └── utils.py                              # Utility functions supporting post-processing operations.
 |   └── utils/
-|   |   └── circle_cropper.py
-|   |   └── transforms.py
+|   |   └── circle_cropper.py                     # Helper functions for circular cropping of endoscopic images.
+|   |   └── transforms.py                         # Image transformation and augmentation utilities used during training and inference.
 |   └── __init__.py
-|   └── dataset.py
-|   └── encoders.py
-|   └── loss.py
-|   └── model.py
-|── scripts/                                      # Các file thực thi project
-|   └── download_and_extract_dataset.py
-|   └── infer_retrieval.py
-|   └── prepare_data.py
-|   └── rerank_posfuse.py
-|   └── train.py
-|── utils/                                        # 
-|   └── config.py
-|   └── drive_utils.py
-|   └── get_path.py
-|   └── logger.py
-|── .env                                          # (Tùy chọn) Biến môi trường
+|   └── dataset.py                                # Dataset class definitions and data loading pipeline for NanoCLIP.
+|   └── encoders.py                               # Encoder model architectures (e.g., image and text encoders) used in NanoCLIP.
+|   └── loss.py                                   # Loss function implementation.
+|   └── model.py                                  # Main NanoCLIP model definition and forward pass logic.
+|── scripts/                                      
+|   └── download_and_extract_dataset.py           # Script to download and extract the test dataset automatically.
+|   └── infer_retrieval.py                        # Script to run the initial image retrieval process.
+|   └── prepare_data.py                           # Script for preparing and organizing datasets before training.
+|   └── rerank_posfuse.py                         # Script to perform re-ranking of retrieval results using Pos-Fuse and Gemini.
+|   └── train.py                                  # Script for training and fine-tuning the NanoCLIP model.
+|── utils/                                        
+|   └── config.py                                 # Configuration settings and parameter definitions.
+|   └── drive_utils.py                            # Utility functions for interacting with Google Drive or other storage services.
+|   └── get_path.py                               # Functions to handle and resolve dataset and file paths consistently.
+|   └── logger.py                                 # Logger setup for tracking experiments and debugging.
+|── .env                                          # (Optional) Environment variables to configure runtime parameters securely.
 |── .gitinore
-|── config.yaml
+|── config.yaml                                   # YAML configuration file for project-wide settings and hyperparameters.
 |── requirements.txt
 ```
 
