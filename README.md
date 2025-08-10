@@ -12,9 +12,9 @@ The system begins with **10 model NanoCLIP** (Kfold) architecture to quickly ret
 
 ```
 .
-|── checkpoints/                # Save model parameter and checkpoint finetune
-|── data/                       # Chứa dataset của ENTRep-acmmm-track3
-|── nano_clip/
+|── checkpoints/                                  # Stores trained model parameters and checkpoints from fine-tuning processes.
+|── data/                                         # Contains the ENTRep-ACMMM-TRACK-3 dataset used for training and evaluation.
+|── nano_clip/                                    # Core module implementing the NanoCLIP model pipeline: dataset creation, training, inference, and post-processing.
 |   └── inference/
 |   |   └── inference_model.py
 |   |   └── retrieval.py
@@ -29,13 +29,13 @@ The system begins with **10 model NanoCLIP** (Kfold) architecture to quickly ret
 |   └── encoders.py
 |   └── loss.py
 |   └── model.py
-|── scripts/
+|── scripts/                                      # Các file thực thi project
 |   └── download_and_extract_dataset.py
 |   └── infer_retrieval.py
 |   └── prepare_data.py
 |   └── rerank_posfuse.py
 |   └── train.py
-|── utils/
+|── utils/                                        # 
 |   └── config.py
 |   └── drive_utils.py
 |   └── get_path.py
