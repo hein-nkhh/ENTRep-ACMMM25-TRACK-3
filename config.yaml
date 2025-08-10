@@ -14,6 +14,10 @@ data:
   DOWNLOADED_FILES: "./data/downloaded_files"
   LIST_IMAGES: "./data/downloaded_files/ENTRep_Private_Dataset/ENTRep Private Dataset"
 
+  RERANK_POSFUSE_DIR: "./data/rerank_posfuse_result"
+  RERANK_POSFUSE_JSON_DIR: "./data/rerank_posfuse_result/combine_gemini.json"
+  
+
 logging:
   save_dir: "./checkpoints/nano_clip/logs"
 

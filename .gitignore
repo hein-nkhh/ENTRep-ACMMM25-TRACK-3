@@ -210,7 +210,9 @@ __marimo__/
 checkpoints/
 checkpoints/**/*
 
-# data/dataset, result, downloaded_files
+# data/dataset, result, downloaded_files, rerank_posfuse
 data/dataset
 data/result
 data/downloaded_files
+data/rerank_posfuse_result
+data/Postpre/
