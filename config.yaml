@@ -11,7 +11,7 @@ data:
   TEST_CSV: "./data/dataset/test.csv"
 
 logging:
-  save_dir: "./data/logs"
+  save_dir: "./checkpoints/nano_clip/logs"
 
 VAL_RATIO : 0.1
 

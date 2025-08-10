@@ -213,6 +213,3 @@ checkpoints/**/*
 # data/dataset, result 
 data/dataset
 data/result
-
-# data/log (training model result)
-data/logs
