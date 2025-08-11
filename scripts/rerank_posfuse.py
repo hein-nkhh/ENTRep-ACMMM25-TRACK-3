@@ -10,7 +10,7 @@ def main():
     print("=" * 60)
     
     csv_file = os.path.join(cfg['data']['RESULT_TOP_K'], 'image_retrieval_results.csv')
-    json_file = r"E:\Project\ENTRep-ACMMM25-TRACK-3\data\Postpre\combined_reranked_results_avg.json"
+    json_file = os.path.join('./data/Postpre', 'combined_reranked_results_avg.json')
 
     if not os.path.exists(csv_file):
         print(f"CSV file not found: {csv_file}")

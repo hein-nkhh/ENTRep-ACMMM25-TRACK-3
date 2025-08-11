@@ -109,5 +109,45 @@ python -m scripts.infer_retrieval
 ```bash
 python -m scripts.rerank_posfuse
 ```
--  Use the **Pos-Fuse** strategy combined with the **Gemini** model to re-rank the results from Step 4, producing the final ranked list.
+The re-ranking process is carried out in two stages:
+#### Stage 1: Re-ranking with Gemini
+- Use Gemini with the prompt defined in: [nano_clip/postprocess/prompt_rerank_gemini.txt](./nano_clip/postprocess/prompt_rerank_gemini.txt)
+- Input: The top-K images retrieved in Step 4, along with the query description.
+- Gemini analyzes the semantic relevance between the query and each image, assigning an overall_score to each.
+- Example Gemini output:
+```
+{
+    "edema and erythema of the arytenoid cartilages": [
+        {
+            "image_name": "8a424180-7254-40fa-8b69-23e0097ca942.png",
+            "overall_score": 0.975
+        },
+        {
+            "image_name": "276a26b5-d09b-4f96-93d9-eb164d330402.png",
+            "overall_score": 0.825
+        },
+        {
+            "image_name": "64387d4b-f83b-4fbe-949e-ad5fa8c5b227.png",
+            "overall_score": 0.725
+        }
+    ],
+    "posterior commissure hypertrophy": [
+        {
+            "image_name": "daa7869a-ca9c-490c-923d-bbdcc96b8b3c.png",
+            "overall_score": 0.85
+        },
+        {
+            "image_name": "7edfac83-5d53-469e-873c-caea247502b1.png",
+            "overall_score": 0.8
+        }
+    ]
+}
+```
+
+#### Stage 2: Score Fusion with Pos-Fuse
+- Combine the Gemini re-ranking scores from Stage 1 with the NanoCLIP retrieval scores from Step 4.
+- Apply the Pos-Fuse fusion strategy to integrate both score sources, balancing:
+    - Visual similarity (NanoCLIP)
+    - Semantic and clinical reasoning (Gemini)
+- The final ranked list is both visually intuitive and clinically accurate.
 -  Re-ranked results saved at: `./data/rerank_posfuse_result`
