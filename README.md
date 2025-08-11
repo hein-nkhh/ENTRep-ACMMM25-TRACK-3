@@ -19,8 +19,7 @@ The system begins with **10 model NanoCLIP** (Kfold) architecture to quickly ret
 |   |   └── inference_model.py                    # Defines the inference model architecture and loading pre-trained weights.
 |   |   └── retrieval.py                          # Implements the image retrieval logic and query processing.
 |   └── postprocess/
-|   |   └── posfuse_combiner.py                   # Implements the Pos-Fuse score 
-fusion strategy for re-ranking retrieved results.
+|   |   └── posfuse_combiner.py                   # Implements the Pos-Fuse score fusion strategy for re-ranking retrieved results.
 |   |   └── prompt_rerank_gemini.txt              # Prompt using gemini for reranking 
 |   |   └── utils.py                              # Utility functions supporting post-processing operations.
 |   └── utils/
